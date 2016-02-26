@@ -24,10 +24,10 @@ class EmployeeController {
 		query = {
 			and {
 				if(params.firstName)
-				like("firstName", params.firstName + '%')
+				like("firstName", '%' + params.firstName + '%')
 				
 				if(params.lastName)
-				like("lastName", params.lastName + '%')
+				like("lastName", '%' + params.lastName + '%')
 				
 				if(params.department){
 					def selectedDepartment = Department.get(Integer.parseInt(params.department))
