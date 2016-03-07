@@ -9,8 +9,23 @@ import grails.transaction.Transactional
 class EmployeeController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	def myService
+	def employeeService
 
     def index(Integer max) {
+		
+		/*
+		 * Testing other methods
+		 */
+		myService.serviceMethod()
+		employeeService.fetchPropertyFromConfig()
+		employeeService.processHttpGet()
+		employeeService.parseJson()
+		
+		/*
+		 * Testing other methods ends
+		 */
 		//Retain the params
 		flash.firstName = params.firstName
 		flash.lastName = params.lastName
@@ -32,6 +47,8 @@ class EmployeeController {
 				if(params.department){
 					def selectedDepartment = Department.get(Integer.parseInt(params.department))
 					eq('department', selectedDepartment)
+					
+					employeeService.toAndFromJson(selectedDepartment)
 				}
 			}
 		}
@@ -39,10 +56,12 @@ class EmployeeController {
 		results = criteria.list (params, query)
 		
 		def departmentList = Department.findAll()
+		
         //respond Employee.list(params), model:[employeeInstanceCount: Employee.count()]
 		render(view: 'index', model: [employeeList: results, departmentList: departmentList])
     }
-
+	
+	//Built in methods from scaffolding
     def show(Employee employeeInstance) {
         respond employeeInstance
     }

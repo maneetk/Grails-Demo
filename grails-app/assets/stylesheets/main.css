@@ -594,3 +594,13 @@ a.skip {
 	position: absolute;
 	left: -9999px;
 }
+
+#grailsLogo img {
+	width: 40px;
+}
+
+#grailsLogo span {
+    font-size: 31px;
+    vertical-align: super;
+    color: #1E28C1;
+}
